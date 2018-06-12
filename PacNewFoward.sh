@@ -18,7 +18,6 @@ ajustaParametros(){
 	sed 's/ //g' ./config/ip1.txt > ./config/IP
 	sed 's/ //g' ./config/mac1.txt > ./config/MAC_R
 	sed 's/ //g' ./config/interface1.txt > ./config/INTERFACE
-
 }
 
 enviaFrame1(){
