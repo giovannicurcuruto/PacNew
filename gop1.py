@@ -42,7 +42,7 @@ def main(argv):
 	# 7 - E0:01
 
 
-   prio = "20:01"
+   prio = "30:01:08:00"
    proto = "81:00" + ":" + prio
    try:
       opts, args = getopt.getopt(argv,"hs:d:i:",["src=","dst=", "info="])
@@ -83,7 +83,7 @@ def main(argv):
 
 #While feito para durar aproximadamente 10 segundos.
    contx = 0
-   while (contx <= 99999):
+   while (contx <= 9999999):
    	s.send(ethernet_hdr_str + ethernet_data_str)    
         contx = contx + 1
 

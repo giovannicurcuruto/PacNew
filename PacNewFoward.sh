@@ -66,22 +66,30 @@ echo
 echo Adquirindo o MAC da maquina transmissora.
 var=$(cat ./config/INTERFACE)
 sudo ifconfig  $var | grep -i hw | awk '{print $7}' > ./config/MAC_T
-
-echo IP do receptor: $ip_recep
-echo
+sudo ifconfig  $var | grep -i "inet end" | awk '{print $3}' > ./config/IP_LOCAL
+echo IP do receptor: 
+echo $ip_recep
+echo IP do transmissor:
+cat ./config/IP_LOCAL
 echo MAC do receptor: 
 cat ./config/MAC_R
-echo
 echo MAC do transmissor:
 cat ./config/MAC_T
-echo
 echo Interface de saída:
 cat ./config/INTERFACE
 echo
+echo
+echo
+
+echo Será necessario colocar o Switch em uma porta Taggeada, antes de continuar
+echo Pressione \"Enter\" após alterar a porta do switch.
+read ext
+
 echo Nesta maquina deseja enviar os pacotes com prioridade [0, 1, 2, 3] ou [4, 5, 6, 7]?
 echo Para [0, 1, 2, 3] digite \"1\"
 echo Para [4, 5, 6, 7] digite \"2\"
 read OP
+
 
 if [ "$OP" = "1" ]
 then
