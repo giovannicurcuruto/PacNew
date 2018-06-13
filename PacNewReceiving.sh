@@ -3,61 +3,87 @@
 ###########################################################################################################3
 
 prioridades(){
+	pv0 = "0"
+	pv1 = "0"
+	pv2 = "0"
+	pv3 = "0"
+	pv4 = "0"
+	pv5 = "0"
+	pv6 = "0"
+	pv7 = "0"
+
 	v0=$(ls -l ./Receiving/p0 | awk '{print $5}')
 	if [ $v0 = "0" ]
 	then
-		echo Prioridade 0: Não	
+		echo Prioridade 0: Não
+		pv0="0"	
 	else
 		echo Prioridade 0: Sim
+		pv0="1"
+		
 	fi
 	v1=$(ls -l ./Receiving/p1 | awk '{print $5}')
 	if [ $v1 = "0" ]
 	then
-		echo Prioridade 1: Não	
+		echo Prioridade 1: Não
+		pv1="0"	
 	else
 		echo Prioridade 1: Sim
+		pv1="1"
 	fi
 	v2=$(ls -l ./Receiving/p2 | awk '{print $5}')
 	if [ $v2 = "0" ]
 	then
-		echo Prioridade 2: Não	
+		echo Prioridade 2: Não
+		pv2="0"	
 	else
 		echo Prioridade 2: Sim
+		pv2="1"
 	fi
 	v3=$(ls -l ./Receiving/p3 | awk '{print $5}')
 	if [ $v3 = "0" ]
 	then
-		echo Prioridade 3: Não	
+		echo Prioridade 3: Não
+		pv3="0"	
 	else
 		echo Prioridade 3: Sim
+		pv3="1"
 	fi
 	v4=$(ls -l ./Receiving/p4 | awk '{print $5}')
 	if [ $v4 = "0" ]
 	then
 		echo Prioridade 4: Não	
+		pv4="0"
 	else
 		echo Prioridade 4: Sim
+		pv4="1"
 	fi
 	v5=$(ls -l ./Receiving/p5 | awk '{print $5}')
 	if [ $v5 = "0" ]
 	then
 		echo Prioridade 5: Não	
+		pv5="0"
 	else
 		echo Prioridade 5: Sim
+		pv5="1"
 	fi
 	v6=$(ls -l ./Receiving/p6 | awk '{print $5}')
 	if [ $v6 = "0" ]
 	then
 		echo Prioridade 6: Não	
+		pv6="0"
 	else
 		echo Prioridade 6: Sim
+		pv6="1"
 	fi
 	v7=$(ls -l ./Receiving/p7 | awk '{print $5}')
 	if [ $v7 = "0" ]
 	then
 		echo Prioridade 7: Não	
+		pv7="0"
 	else
 		echo Prioridade 7: Sim
+		pv0="1"
 	fi
 
 }
@@ -121,7 +147,45 @@ pesoPorP(){
 
 ###########################################################################################################3
 
+porcentagem(){
+	total=$(ls -l ./Receiving/capBrutoVisual | awk '{print $5}')
 
+	echo O fluxo total corresponde a: $total
+	echo Das capturas feitas de cada Fluxo, podemos dizer que o equipamento consegue capturar (caso não apareça nada, não foi feito com sucesso):
+	if [ $pv0 != "0" ]
+	then
+		echo Da prioridade 0, gerou um arquivo no tamanho de: $v0
+	fi
+	if [ $pv1 != "0" ]
+	then
+		echo Da prioridade 0, gerou um arquivo no tamanho de: $v1
+	fi
+	if [ $pv2 != "0" ]
+	then
+		echo Da prioridade 0, gerou um arquivo no tamanho de: $v2
+	fi
+	if [ $pv3 != "0" ]
+	then
+		echo Da prioridade 0, gerou um arquivo no tamanho de: $v3
+	fi
+	if [ $pv4 != "0" ]
+	then
+		echo Da prioridade 0, gerou um arquivo no tamanho de: $v4
+	fi
+	if [ $pv5 != "0" ]
+	then
+		echo Da prioridade 0, gerou um arquivo no tamanho de: $v5
+	fi
+	if [ $pv6 != "0" ]
+	then
+		echo Da prioridade 0, gerou um arquivo no tamanho de: $v6
+	fi
+	if [ $pv7 != "0" ]
+	then
+		echo Da prioridade 0, gerou um arquivo no tamanho de: $v7
+	fi
+
+}
 
 ###########################################################################################################3
 
@@ -151,7 +215,7 @@ prioridades
 echo
 pesoPorP
 echo
-
+porcentagem
 
 
 
