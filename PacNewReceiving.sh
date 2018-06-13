@@ -3,14 +3,6 @@
 ###########################################################################################################3
 
 prioridades(){
-	pv0 = "0"
-	pv1 = "0"
-	pv2 = "0"
-	pv3 = "0"
-	pv4 = "0"
-	pv5 = "0"
-	pv6 = "0"
-	pv7 = "0"
 
 	v0=$(ls -l ./Receiving/p0 | awk '{print $5}')
 	if [ $v0 = "0" ]
@@ -83,7 +75,7 @@ prioridades(){
 		pv7="0"
 	else
 		echo Prioridade 7: Sim
-		pv0="1"
+		pv7="1"
 	fi
 
 }
@@ -91,24 +83,24 @@ prioridades(){
 ###########################################################################################################3
 
 capBruto(){
-	sudo tcpdump -i $INTER -w ./Receiving/capBruto &
-	sudo sleep 15
+	sudo tcpdump -i $INTER -w ./Receiving/capBruto.cap &
+	sudo sleep 20
 	sudo killall tcpdump
-	sudo tcpdump -n -e -r ./Receiving/capBruto > ./Receiving/capBrutoVisual
+	sudo tcpdump -n -e -r ./Receiving/capBruto.cap > ./Receiving/capBrutoVisual.cap
 	echo Capitura concluida.
 }
 
 ###########################################################################################################3
 
 capDiv(){
-	sudo grep "p 0" ./Receiving/capBrutoVisual > ./Receiving/p0
-	sudo grep "p 1" ./Receiving/capBrutoVisual > ./Receiving/p1
-	sudo grep "p 2" ./Receiving/capBrutoVisual > ./Receiving/p2
-	sudo grep "p 3" ./Receiving/capBrutoVisual > ./Receiving/p3
-	sudo grep "p 4" ./Receiving/capBrutoVisual > ./Receiving/p4
-	sudo grep "p 5" ./Receiving/capBrutoVisual > ./Receiving/p5
-	sudo grep "p 6" ./Receiving/capBrutoVisual > ./Receiving/p6
-	sudo grep "p 7" ./Receiving/capBrutoVisual > ./Receiving/p7
+	sudo grep "p 0" ./Receiving/capBrutoVisual.cap > ./Receiving/p0
+	sudo grep "p 1" ./Receiving/capBrutoVisual.cap > ./Receiving/p1
+	sudo grep "p 2" ./Receiving/capBrutoVisual.cap > ./Receiving/p2
+	sudo grep "p 3" ./Receiving/capBrutoVisual.cap > ./Receiving/p3
+	sudo grep "p 4" ./Receiving/capBrutoVisual.cap > ./Receiving/p4
+	sudo grep "p 5" ./Receiving/capBrutoVisual.cap > ./Receiving/p5
+	sudo grep "p 6" ./Receiving/capBrutoVisual.cap > ./Receiving/p6
+	sudo grep "p 7" ./Receiving/capBrutoVisual.cap > ./Receiving/p7
 }
 
 ###########################################################################################################3
@@ -134,57 +126,56 @@ ajustaParametros(){
 
 pesoPorP(){
 	echo Tamanho do arquivo/prioridade:
-	echo Prioridade 0: $v0 Mb
-	echo Prioridade 1: $v1 Mb
-	echo Prioridade 2: $v2 Mb
-	echo Prioridade 3: $v3 Mb
-	echo Prioridade 4: $v4 Mb
-	echo Prioridade 5: $v5 Mb
-	echo Prioridade 6: $v6 Mb
-	echo Prioridade 7: $v7 Mb
+	echo Prioridade 0: $v0 bytes
+	echo Prioridade 1: $v1 bytes
+	echo Prioridade 2: $v2 bytes
+	echo Prioridade 3: $v3 bytes
+	echo Prioridade 4: $v4 bytes
+	echo Prioridade 5: $v5 bytes
+	echo Prioridade 6: $v6 bytes
+	echo Prioridade 7: $v7 bytes
 
 }
 
 ###########################################################################################################3
 
 porcentagem(){
-	total=$(ls -l ./Receiving/capBrutoVisual | awk '{print $5}')
+	total=$(ls -l ./Receiving/capBrutoVisual.cap | awk '{print $5}')
 
-	echo O fluxo total corresponde a: $total
-	echo Das capturas feitas de cada Fluxo, podemos dizer que o equipamento consegue capturar (caso não apareça nada, não foi feito com sucesso):
+	echo O fluxo total corresponde a: $total bytes
+	echo Das capturas feitas de cada Fluxo, podemos dizer que o equipamento consegue capturar \(caso não apareça nada, não foi feito com sucesso\):
 	if [ $pv0 != "0" ]
 	then
-		echo Da prioridade 0, gerou um arquivo no tamanho de: $v0
+		echo Da prioridade 0, gerou um arquivo no tamanho de: $v0 bytes
 	fi
 	if [ $pv1 != "0" ]
 	then
-		echo Da prioridade 0, gerou um arquivo no tamanho de: $v1
+		echo Da prioridade 1, gerou um arquivo no tamanho de: $v1 bytes
 	fi
 	if [ $pv2 != "0" ]
 	then
-		echo Da prioridade 0, gerou um arquivo no tamanho de: $v2
+		echo Da prioridade 2, gerou um arquivo no tamanho de: $v2 bytes
 	fi
 	if [ $pv3 != "0" ]
 	then
-		echo Da prioridade 0, gerou um arquivo no tamanho de: $v3
+		echo Da prioridade 3, gerou um arquivo no tamanho de: $v3 bytes
 	fi
 	if [ $pv4 != "0" ]
 	then
-		echo Da prioridade 0, gerou um arquivo no tamanho de: $v4
+		echo Da prioridade 4, gerou um arquivo no tamanho de: $v4 bytes
 	fi
 	if [ $pv5 != "0" ]
 	then
-		echo Da prioridade 0, gerou um arquivo no tamanho de: $v5
+		echo Da prioridade 5, gerou um arquivo no tamanho de: $v5 bytes
 	fi
 	if [ $pv6 != "0" ]
 	then
-		echo Da prioridade 0, gerou um arquivo no tamanho de: $v6
+		echo Da prioridade 6, gerou um arquivo no tamanho de: $v6 bytes
 	fi
 	if [ $pv7 != "0" ]
 	then
-		echo Da prioridade 0, gerou um arquivo no tamanho de: $v7
+		echo Da prioridade 7, gerou um arquivo no tamanho de: $v7 bytes
 	fi
-
 }
 
 ###########################################################################################################3
@@ -206,10 +197,12 @@ echo
 echo Interface utilizada: $INTER
 echo
 echo Antes de começar a captura de pacotes, certifique-se que a interface utilizada apareceu corretamente.
-echo Caso apareça, pressione enter para iniciar as capturas...
+echo Tambem deverá ser alterado a porta no Switch, para uma porta que esteja Taggeada.
+echo Caso apareça e tenha alterado para a porta Taggeada, pressione enter para iniciar as capturas...
 read nothing
 capBruto
 capDiv
+echo
 echo No teste até o momento, possuimos as prioridades:
 prioridades
 echo
