@@ -51,15 +51,15 @@ enviaFrameAll(){
 }
 
 
-
-
 echo Antes de iniciar, vamos limpar a tela...
-sleep 3
+sleep 5
 clear
 
+echo Leia o arquivo \"Leiaaqui.txt\" antes de continuar. 
 echo Informe o endereço IP da maquina receptora.
 read ip_recep
 ping -c 1 $ip_recep
+clear 
 echo 
 ajustaParametros
 echo
@@ -81,9 +81,7 @@ echo
 echo
 echo
 
-echo Será necessario colocar o Switch em uma porta Taggeada, antes de continuar
-echo Pressione \"Enter\" após alterar a porta do switch.
-read ext
+echo Será necessario realizar confirmar alguns parametros. Consulte o arquivo \"Leiaaqui.txt\" para maiores informações.
 
 echo Nesta maquina deseja enviar os pacotes com prioridade [0, 1, 2, 3] ou [4, 5, 6, 7]?
 echo Para [0, 1, 2, 3] digite \"1\"

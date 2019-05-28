@@ -87,7 +87,7 @@ capBruto(){
 	sudo sleep 20
 	sudo killall tcpdump
 	sudo tcpdump -n -e -r ./Receiving/capBruto.cap > ./Receiving/capBrutoVisual.cap
-	echo Capitura concluida.
+	echo Captura concluida.
 }
 
 ###########################################################################################################3
@@ -181,10 +181,11 @@ porcentagem(){
 ###########################################################################################################3
 
 echo Antes de iniciar, vamos limpar a tela...
-sleep 3
+sleep 5
 clear
 #Coletando a interface
 
+echo Leia o arquivo \"Leiaaqui.txt\" antes de continuar. 
 echo Informe o endereço IP da maquina transmissora.
 read ip_recep
 ping -c 1 $ip_recep
@@ -196,9 +197,8 @@ INTER=$(cat ./Receiving/INTERFACE)
 echo
 echo Interface utilizada: $INTER
 echo
-echo Antes de começar a captura de pacotes, certifique-se que a interface utilizada apareceu corretamente.
-echo Tambem deverá ser alterado a porta no Switch, para uma porta que esteja Taggeada.
-echo Caso apareça e tenha alterado para a porta Taggeada, pressione enter para iniciar as capturas...
+echo Será necessario realizar confirmar alguns parametros. Consulte o arquivo \"Leiaaqui.txt\" para maiores informações.
+echo Pressione ENTER para continuar: 
 read nothing
 capBruto
 capDiv
